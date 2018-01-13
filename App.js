@@ -1,10 +1,39 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import { TabNavigator } from 'react-navigation';
+
+class RecentChatsScreen extends React.Component {
+  render() {
+    return (
+      <View>
+        <Text>List of reccent chats</Text>
+        <Button
+  onPress={() => this.props.navigation.navigate('Chat', { user: 'Lucy' })}
+  title="Chat with Lucy"
+  />
+    </View>
+    );
+  }
+}
+
+class AllContactsScreen extends React.Component {
+  render() {
+    return(
+      <View>
+        <Text>List of all contacts</Text>
+        <Button
+  onPress={() => this.props.navigation.navigate('Chat', { user: 'Lucy' })}
+  title="Chat with Lucy"
+  />
+    </View>
+    );
+  }
+}
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Welcome'
+    title: 'Welcome Folks'
   };
   render() {
     const { navigate } = this.props.navigation;
@@ -32,8 +61,17 @@ class ChatScreen extends React.Component {
 
 }
 
+const MainScreenNavigator = TabNavigator({
+  Recent: { screen: RecentChatsScreen },
+  All: { screen: AllContactsScreen },
+});
+
 export const SimpleApp = StackNavigator({
-  Home: { screen: HomeScreen },
+  Home: { screen: MainScreenNavigator,
+          navigationOptions: {
+            title: 'My Charts',
+      },
+   },
   Chat: { screen: ChatScreen },
 });
 
